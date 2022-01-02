@@ -5,8 +5,8 @@ jobs:
     docker:
     - image: circleci/command-convenience:0.1
       auth:
-        username: $DOCKER_HUB_USER
-        password: $DOCKER_HUB_PASSWORD
+        username: novalanto9109
+        password: novalanto9109
       environment:
         NAME: postgres-script-enhance
         CONTAINER_ORG: circleci
