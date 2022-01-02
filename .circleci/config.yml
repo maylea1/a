@@ -1,6 +1,5 @@
 version: 2.0
 jobs:
-  parallelism: 3
   deploy:
     machine:
       enabled: true
