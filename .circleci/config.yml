@@ -2,15 +2,11 @@ version: 2.0
 jobs:
   deploy:
     parallelism: 3
-    docker:
-    - image: postgres-script-enhance
-      environment:
-        NAME: postgres-script-enhance
-        CONTAINER_ORG: circleci
-        DOCKERFILE_PATH: Dockerfile
-        DOCKER_REGISTRY: dockerhub
-
+    machine:
+      enabled: true
     working_directory: /home/circleci/postgres
+    environment:
+      DOCKER_IMAGE=circleci/postgres-script-enhance
 
     steps:
     - checkout
