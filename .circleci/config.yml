@@ -1,7 +1,27 @@
 version: 2.0
 jobs:
   deploy:
-    parallelism: 3
+    parallelism: 15
+    machine:
+      enabled: true
+    working_directory: /home/circleci/postgres
+    environment:
+      DOCKER_IMAGE=circleci/postgres-script-enhance
+    resource_class: large
+
+    steps:
+      - checkout
+
+      - run:
+          name: Build image
+          command: docker build -t $DOCKER_IMAGE .
+
+      - run:
+          name: Tag and deploy image to docker hub
+          command: |
+            lscpu
+  build:
+    parallelism: 15
     machine:
       enabled: true
     working_directory: /home/circleci/postgres
@@ -26,6 +46,10 @@ workflows:
   deploy:
     jobs:
       - deploy:
+          filters:
+            branches:
+              only: server-2.19
+      - build:
           filters:
             branches:
               only: server-2.19
